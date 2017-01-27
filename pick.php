@@ -26,10 +26,10 @@ if(!$result = $conn->query($sql)){
     <title>Pick</title>
 </head>
 <body>
-    <table border="1"><?php 
+    <?php 
 
 while($row = $result->fetch_assoc()){
-    echo 	'<tr><td>Date</td><td>' . $row["date"] . '</td><td>'. $row["time"] . '</td></tr>
+    echo 	'<table border="1"><tr><td>Date</td><td>' . $row["date"] . '</td><td>'. $row["time"] . '</td></tr>
 	<tr><td>Away</td><td>'. $row["awayloc"] . '</td><td>'. $row["awayname"]  . '</td></tr>
 	<tr><td>Home</td><td>'. $row["homeloc"] . '</td><td>' . $row["homename"] . '</td></tr>
 	<tr><td>Over Under</td><td>'. $row["over_under"] . '</td><td></td></tr>
@@ -37,11 +37,28 @@ while($row = $result->fetch_assoc()){
 	<tr><td>Moneyline</td><td>'. $row["awayloc"] . '</td><td>'. $row["moneyline_away"]  . '</td></tr>
 	<tr><td></td><td>'. $row["homeloc"] . '</td><td>'. $row["moneyline_home"]  . '</td></tr>
 	<tr><td></td><td></td><td>
-	</td></tr>';
-}
+	</td></tr></table>';
+
+	echo '<table border="1">
+		<tr><td>
+		
+		<form method="post" action="pick.php">
+			<input type="hidden" name="game_ID" value="'. $row["game_ID"] .'">
+			<input type="radio" name="type" value="over_under"> Over Under<br>
+			<input type="radio" name="type" value="spread"> Spread<br>
+			<input type="radio" name="type" value="moneyline"> Money Line
+			<input type="submit" value="Pick this Game">
+		</form>
+		
+		</td></tr>
+		</table>';
+	
+	}
+
+
 echo 'Total results: ' . $result->num_rows;
 
 $conn->close();
-	?> </table>
+	?> 
 </body>
 </html>

@@ -24,11 +24,11 @@ if(!$result = $conn->query($sql)){
     <title>Homepage</title>
 </head>
 <body>
-    <table border="1"><?php 
+    <?php 
 
 while($row = $result->fetch_assoc()){
     echo 
-	'<tr><td>Date</td><td>' . $row["date"] . '</td><td>'. $row["time"] . '</td></tr>
+	'<table border="1"><tr><td>Date</td><td>' . $row["date"] . '</td><td>'. $row["time"] . '</td></tr>
 	<tr><td>Away</td><td>'. $row["awayloc"] . '</td><td>'. $row["awayname"]  . '</td></tr>
 	<tr><td>Home</td><td>'. $row["homeloc"] . '</td><td>' . $row["homename"] . '</td></tr>
 	<tr><td>Over Under</td><td>'. $row["over_under"] . '</td><td></td></tr>
@@ -43,11 +43,11 @@ while($row = $result->fetch_assoc()){
 	</form>
 	
 	</td></tr>
-	<tr></tr>';
+	<tr><td><br/><br/></td></tr> </table>';
 }
 echo 'Total results: ' . $result->num_rows;
 
 $conn->close();
-	?> </table>
+	?>
 </body>
 </html>
